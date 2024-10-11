@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список задач</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <div id="task-form">
+            <div id="task-input-container">
+                <div class="task-input-text">
+                <input type="text" id="task-title" placeholder="Заголовок задачи" required>
+                    <input type="text" id="task-input" placeholder="Описание задачи" required>
+                </div>
+                <div class="add-button-container">
+                    <img src="./images/button add.png" alt="Добавить задачу" width="70" height="70">
+                </div>
+            </div>
+        </div>
+        <ul id="task-list"></ul>
+    </div>
+    <script src="./functions/add.js"></script>
+</body>
+</html>
