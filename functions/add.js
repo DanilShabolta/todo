@@ -53,6 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const editContainer = container.querySelector('.edit-container');
         const taskTitleElement = container.querySelector('.task-title');
         const taskDescriptionElement = container.querySelector('.task-description');
+        const infoBtn = container.querySelector('.info-btn');
+        const shareBtn = container.querySelector('.share-btn');
 
         deleteBtn.addEventListener('click', (event) => {
             event.stopPropagation();
@@ -63,6 +65,48 @@ document.addEventListener('DOMContentLoaded', () => {
         container.addEventListener('click', () => {
             const dropdownMenu = container.querySelector('.task-dropdown-menu');
             dropdownMenu.style.display = dropdownMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        infoBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            const infoOverlay = document.createElement('div');
+            infoOverlay.classList.add('info-overlay');
+            infoOverlay.innerHTML = `
+                <div class="info-content">
+                    <h3>${taskTitle}</h3>
+                    <p>${taskText}</p>
+                    <button class="close-info">Закрыть</button>
+                </div>
+            `;
+            document.body.appendChild(infoOverlay);
+            infoOverlay.style.display = 'flex'; // Изменено на flex для центрирования
+
+            const closeInfoBtn = infoOverlay.querySelector('.close-info');
+            closeInfoBtn.addEventListener('click', () => {
+                infoOverlay.remove();
+            });
+        });
+
+
+
+        shareBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
+          const sharePanel = document.createElement('div');
+          sharePanel.classList.add('share-panel');
+
+          for (let i = 0; i < 5; i++) {
+              const shareButton = document.createElement('button');
+              const shareImage = document.createElement('img');
+              shareImage.src = `../images/share/share-icon-${i + 1}.png`;
+              shareImage.alt = `Поделиться ${i + 1}`;
+              shareButton.appendChild(shareImage);
+              sharePanel.appendChild(shareButton);
+          }
+
+
+          container.appendChild(sharePanel);
+          sharePanel.style.display = 'flex';
+
         });
 
         editBtn.addEventListener('click', (event) => {

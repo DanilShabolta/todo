@@ -34,13 +34,13 @@ button {
 }
 
 .task-input-text {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
 
 input[type="text"] {
   box-sizing: border-box;
-  flex-grow: 1;
   height: 32px;
   padding: 10px;
   margin-right: 8px;
@@ -263,6 +263,72 @@ li {
           border: 1px solid rgba(163, 87, 9, 1);
           border-radius: 4px;
           background-color: rgba(36, 35, 32, 1);
+      }
+  }
+}
+
+.info-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(7, 7, 7, 0.89);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .info-content {
+    width: 90%;
+    max-width: 500px;
+    padding: 18px;
+    border: 1px solid rgba(255, 131, 3, 1);
+    border-radius: 8px;
+    background-color: rgba(36, 35, 32, 1);
+    color: rgba(240, 227, 202, 0.64);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    button {
+      font-size: 10px;
+      font-weight: 400;
+      line-height: 18px;
+      text-align: center;
+      height: 24px;
+      width: 64px;
+      color: rgba(217, 217, 217, 1);
+      border: 1px solid rgba(163, 87, 9, 1);
+      border-radius: 4px;
+      background-color: rgba(36, 35, 32, 1);
+      margin-top: 10px;
+
+      img {
+        width: 48px;
+        height: 48px;
+      }
+    }
+  }
+}
+
+
+
+
+.share-panel {
+  display: none;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 10px;
+
+  button {
+      margin: 0;
+      img {
+          height: 36px;
+          width: 36px;
       }
   }
 }
