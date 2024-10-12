@@ -19,9 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function addTask(taskTitle, taskText) {
         const container = document.createElement('div');
-        container.id = 'task-container';
+        container.id='task-container';
         container.innerHTML = `
-        <div id="task-visible">
         <div id="task-container-text">
             <h3 id="task-title">${taskTitle}</h3>
             <p id="task-description">${taskText}</p>
@@ -32,9 +31,16 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         container.addEventListener('click', () => {
-            const dropdownMenu = container.querySelector('#task-dropdown-menu');
-            const isVisible = dropdownMenu.style.display === 'block';
-            dropdownMenu.style.display = isVisible ? 'none' : 'block';
+            const dropdownMenu = container.querySelector('.task-dropdown-menu');
+            if (dropdownMenu) {
+                dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+            } else {
+                const newDropdownMenu = document.createElement('div');
+                newDropdownMenu.classList.add('task-dropdown-menu');
+                newDropdownMenu.innerHTML = 'Это дополнительное меню';
+                newDropdownMenu.style.display = 'block';
+                container.appendChild(newDropdownMenu);
+            }
         });
 
         const taskActions = document.createElement('div');
