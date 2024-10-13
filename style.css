@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #1F1E1B;
+  background-color: rgb(27, 26, 23);
   margin: 0;
   padding: 20px;
 }
@@ -8,8 +8,7 @@ body {
 #app {
   max-width: 400px;
   margin: 0 auto;
-  background: #fff;
-  background-color: #1F1E1B;
+  background-color: rgb(27, 26, 23);
   padding: 20px;
 }
 
@@ -381,12 +380,16 @@ li {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 128px;
-  background-color: #f9f9f9;
-  border-top: 4px solid #ccc;
-  border-bottom: 4px solid #ccc;
-  color: #333;
-  font-size: 1.5rem;
+  height: 64px;
+  background-color: rgb(27, 26, 23);
+  border-top: 4px solid rgb(163, 87, 9);
+  border-bottom: 4px solid rgb(163, 87, 9);
+  color: rgb(255, 255, 255);
+  font-size: 24px;
   text-align: center;
-  margin: 16px 0;
+  margin: 16px auto;
+  width: 40%;
+  max-width: none;
+  overflow: visible;
+  white-space: nowrap;
 }/*# sourceMappingURL=style.css.map */

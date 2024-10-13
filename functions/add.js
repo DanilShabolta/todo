@@ -3,6 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const taskInput = document.getElementById('task-input');
     const taskList = document.getElementById('task-list');
     const addButtonImage = document.querySelector('.add-button-container img');
+    
+    let noTasksMessage = document.createElement('div');
+    noTasksMessage.id = 'no-tasks-message';
+    noTasksMessage.style.display = 'none';
+    noTasksMessage.innerText = 'No tasks';
+    taskList.parentElement.insertBefore(noTasksMessage, taskList);
 
     loadTasks();
 
@@ -16,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
             saveTaskToLocalStorage(taskTitle, taskText);
             taskTitleInput.value = '';
             taskInput.value = '';
+            noTasksMessage.style.display = 'none';
         }
     });
 
@@ -60,10 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     <button class="cancel-delete">Отмена</button>
                 </div>
             </div>
-            <div id="no-tasks-message" style="display: none;">
-                No tasks
-            </div>
-
         `;
 
         const deleteBtn = container.querySelector('.delete-btn');
@@ -76,7 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const shareMenu = container.querySelector('.share-menu');
         const overlay = container.querySelector('.overlay');
         const confirmContainer = container.querySelector('.confirm');
-        const noTasksMessage = container.querySelector('#no-tasks-message')
 
         deleteBtn.addEventListener('click', (event) => {
             event.stopPropagation();
@@ -86,6 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
             confirmContainer.querySelector('.confirm-delete').addEventListener('click', () => {
                 taskList.removeChild(container);
                 removeTaskFromLocalStorage(taskTitle, taskText);
+                checkForNoTasks();
                 overlay.style.display = 'none';
                 confirmContainer.style.display = 'none';
             });
@@ -202,13 +205,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function loadTasks() {
         const tasks = getTasksFromLocalStorage();
-        tasks.forEach(task => {
-            addTask(task.title, task.text);
-        });
-        if (tasks == null) {
+        if (tasks.length === 0) {
             noTasksMessage.style.display = 'flex';
-        }else{
+        } else {
             noTasksMessage.style.display = 'none';
+            tasks.forEach(task => {
+                addTask(task.title, task.text);
+            });
         }
+    }
+
+    function checkForNoTasks() {
+        const tasks = getTasksFromLocalStorage();
+        noTasksMessage.style.display = tasks.length === 0 ? 'flex' : 'none';
     }
 });
