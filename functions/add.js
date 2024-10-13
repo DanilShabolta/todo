@@ -24,28 +24,46 @@ document.addEventListener('DOMContentLoaded', () => {
         container.classList.add('task-container');
         container.innerHTML = `
             <div class="task-main">
-            <div id="task-container-text">
-                <h3 class="task-title">${taskTitle}</h3>
-                <p class="task-description">${taskText}</p>
+                <div id="task-container-text">
+                    <h3 class="task-title">${taskTitle}</h3>
+                    <p class="task-description">${taskText}</p>
+                </div>
+                <div class="task-action">
+                    <button class="delete-btn"><img src="../images/button delete.png"></button>
+                </div>
             </div>
-            <div class="task-action">
-                <button class="delete-btn"><img src="../images/button delete.png"></button>
+            <div class="task-dropdown-menu" style="display: none;">
+                <button class="share-btn"><img src="../images/button share.png"></button>
+                <button class="info-btn"><img src="../images/button info.png"></button>
+                <button class="edit-btn"><img src="../images/button edit.png"></button>
             </div>
-        </div>
-        <div class="task-dropdown-menu" style="display: none;">
-            <button class="share-btn"><img src="../images/button share.png"></button>
-            <button class="info-btn"><img src="../images/button info.png"></button>
-            <button class="edit-btn"><img src="../images/button edit.png"></button>
-        </div>
-        <div class="edit-overlay" style="display: none;"></div>
-        <div class="edit-container" style="display: none;">
-            <input type="text" class="edit-title" value="${taskTitle}" style="height: 32px;">
-            <textarea class="edit-description" value="${taskText}" style="height: 343px;"></textarea>
-            <div class="edit-buttons">
-                <button class="cancel-edit">Отменить</button>
-                <button class="save-edit">Сохранить</button>
+            <div class="overlay" style="display: none;"></div>
+            <div class="edit-container" style="display: none;">
+                <input type="text" class="edit-title" value="${taskTitle}" style="height: 32px;">
+                <textarea class="edit-description" style="height: 343px;">${taskText}</textarea>
+                <div class="edit-buttons">
+                    <button class="cancel-edit">Отменить</button>
+                    <button class="save-edit">Сохранить</button>
+                </div>
             </div>
-        </div>
+            <div class="share-menu" style="display: none;">
+                <button class="share-copy"><img src="../images/share/share copy.png" alt="Share Copy"></button>
+                <button class="share-vk"><img src="../images/share/share vk.png" alt="Share VK"></button>
+                <button class="share-tg"><img src="../images/share/share tg.png" alt="Share TG"></button>
+                <button class="share-ws"><img src="../images/share/share ws.png" alt="Share WS"></button>
+                <button class="share-fb"><img src="../images/share/share fb.png" alt="Share FB"></button>
+            </div>
+            <div class="confirm" style="display: none;">
+                <h2>Вы уверены, что хотите удалить эту задачу?</h2>
+                <div class="confirm-buttons">
+                    <button class="confirm-delete">Удалить</button>
+                    <button class="cancel-delete">Отмена</button>
+                </div>
+            </div>
+            <div id="no-tasks-message" style="display: none;">
+                No tasks
+            </div>
+
         `;
 
         const deleteBtn = container.querySelector('.delete-btn');
@@ -55,11 +73,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const taskDescriptionElement = container.querySelector('.task-description');
         const infoBtn = container.querySelector('.info-btn');
         const shareBtn = container.querySelector('.share-btn');
+        const shareMenu = container.querySelector('.share-menu');
+        const overlay = container.querySelector('.overlay');
+        const confirmContainer = container.querySelector('.confirm');
+        const noTasksMessage = container.querySelector('#no-tasks-message')
 
         deleteBtn.addEventListener('click', (event) => {
             event.stopPropagation();
-            taskList.removeChild(container);
-            removeTaskFromLocalStorage(taskTitle, taskText);
+            overlay.style.display = 'block';
+            confirmContainer.style.display = 'block';
+
+            confirmContainer.querySelector('.confirm-delete').addEventListener('click', () => {
+                taskList.removeChild(container);
+                removeTaskFromLocalStorage(taskTitle, taskText);
+                overlay.style.display = 'none';
+                confirmContainer.style.display = 'none';
+            });
+
+            confirmContainer.querySelector('.cancel-delete').addEventListener('click', () => {
+                overlay.style.display = 'none';
+                confirmContainer.style.display = 'none';
+            });
         });
 
         container.addEventListener('click', () => {
@@ -79,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
             document.body.appendChild(infoOverlay);
-            infoOverlay.style.display = 'flex'; // Изменено на flex для центрирования
+            infoOverlay.style.display = 'flex';
 
             const closeInfoBtn = infoOverlay.querySelector('.close-info');
             closeInfoBtn.addEventListener('click', () => {
@@ -87,31 +121,17 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-
-
         shareBtn.addEventListener('click', (event) => {
             event.stopPropagation();
-          const sharePanel = document.createElement('div');
-          sharePanel.classList.add('share-panel');
-
-          for (let i = 0; i < 5; i++) {
-              const shareButton = document.createElement('button');
-              const shareImage = document.createElement('img');
-              shareImage.src = `../images/share/share-icon-${i + 1}.png`;
-              shareImage.alt = `Поделиться ${i + 1}`;
-              shareButton.appendChild(shareImage);
-              sharePanel.appendChild(shareButton);
-          }
-
-
-          container.appendChild(sharePanel);
-          sharePanel.style.display = 'flex';
-
+            shareMenu.style.display = 'block';
+            overlay.style.display = 'block';
+            container.querySelector('.task-dropdown-menu').style.display = 'none';
         });
 
         editBtn.addEventListener('click', (event) => {
             event.stopPropagation();
             editContainer.style.display = 'block';
+            overlay.style.display = 'block';
             taskTitleElement.parentElement.style.display = 'none';
             container.querySelector('.task-dropdown-menu').style.display = 'none';
             const editDescription = editContainer.querySelector('.edit-description');
@@ -119,21 +139,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         const cancelEditBtn = editContainer.querySelector('.cancel-edit');
-        editBtn.addEventListener('click', (event) => {
-            event.stopPropagation();
-            container.querySelector('.edit-overlay').style.display = 'block';
-            editContainer.style.display = 'block';
-            taskTitleElement.parentElement.style.display = 'none';
-            container.querySelector('.task-dropdown-menu').style.display = 'none';
-        });
 
         cancelEditBtn.addEventListener('click', () => {
             editContainer.style.display = 'none';
-            container.querySelector('.edit-overlay').style.display = 'none';
+            overlay.style.display = 'none';
             taskTitleElement.parentElement.style.display = 'flex';
         });
-        
-        
 
         const saveEditBtn = editContainer.querySelector('.save-edit');
         saveEditBtn.addEventListener('click', () => {
@@ -146,8 +157,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 editContainer.style.display = 'none';
                 taskTitleElement.parentElement.style.display = 'flex';
                 updateTaskInLocalStorage(taskTitle, taskText, newTitle, newText);
-                container.querySelector('.edit-overlay').style.display = 'none';
+                overlay.style.display = 'none';
             }
+        });
+
+        overlay.addEventListener('click', () => {
+            editContainer.style.display = 'none';
+            shareMenu.style.display = 'none';
+            confirmContainer.style.display = 'none';
+            overlay.style.display = 'none';
+            taskTitleElement.parentElement.style.display = 'flex';
         });
 
         taskList.appendChild(container);
@@ -186,5 +205,10 @@ document.addEventListener('DOMContentLoaded', () => {
         tasks.forEach(task => {
             addTask(task.title, task.text);
         });
+        if (tasks == null) {
+            noTasksMessage.style.display = 'flex';
+        }else{
+            noTasksMessage.style.display = 'none';
+        }
     }
 });

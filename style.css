@@ -194,7 +194,7 @@ li {
   width: 35px;
 }
 
-.edit-overlay {
+.overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -300,17 +300,93 @@ li {
   height: 48px;
 }
 
-.share-panel {
-  display: none;
-  flex-direction: row;
-  justify-content: flex-end;
-  gap: 8px;
-  margin-top: 10px;
+.share-menu {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid rgb(255, 131, 3);
+  border-radius: 8px;
+  background-color: rgb(36, 35, 32);
+  padding: 16px 0;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  width: 80%;
+  max-width: 500px;
+  z-index: 1000;
 }
-.share-panel button {
+.share-menu button {
+  width: 48px;
+  height: 48px;
+}
+.share-menu button img {
+  width: 48px;
+  height: 48px;
+}
+
+.confirm {
+  width: 90%;
+  max-width: 400px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(36, 35, 32);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: rgba(240, 227, 202, 0.64);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.confirm::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-color: rgb(163, 87, 9);
+  border-radius: 8px 8px 0 0;
+}
+.confirm h2 {
   margin: 0;
+  text-align: center;
 }
-.share-panel button img {
-  height: 36px;
-  width: 36px;
+.confirm .confirm-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  justify-content: center;
+}
+.confirm .confirm-buttons button {
+  font-size: 12px;
+  padding: 8px 12px;
+  border: 1px solid rgb(255, 131, 3);
+  border-radius: 4px;
+  background-color: rgb(36, 35, 32);
+  color: rgba(240, 227, 202, 0.64);
+  cursor: pointer;
+}
+.confirm .confirm-buttons button:hover {
+  background-color: rgba(255, 131, 3, 0.1);
+}
+
+#no-tasks-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 128px;
+  background-color: #f9f9f9;
+  border-top: 4px solid #ccc;
+  border-bottom: 4px solid #ccc;
+  color: #333;
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 16px 0;
 }/*# sourceMappingURL=style.css.map */
