@@ -56,9 +56,9 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="share-menu" style="display: none;">
                 <button class="share-copy"><img src="../images/share/share copy.png" alt="Share Copy"></button>
                 <button class="share-vk"><img src="../images/share/share vk.png" alt="Share VK"></button>
-                <button class="share-tg"><img src="../images/share/share tg.png" alt="Share TG"></button>
-                <button class="share-ws"><img src="../images/share/share ws.png" alt="Share WS"></button>
-                <button class="share-fb"><img src="../images/share/share fb.png" alt="Share FB"></button>
+                <button class="share-tg"><img src="../images/share/share tg.svg" alt="Share TG"></button>
+                <button class="share-ws"><img src="../images/share/share ws.svg" alt="Share WS"></button>
+                <button class="share-fb"><img src="../images/share/share fb.svg" alt="Share FB"></button>
             </div>
             <div class="confirm" style="display: none;">
                 <h2>Вы уверены, что хотите удалить эту задачу?</h2>
