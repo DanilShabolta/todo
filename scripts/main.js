@@ -35,7 +35,7 @@
                     <p class="task-description">${taskText}</p>
                 </div>
                 <div class="task-action">
-                    <button class="delete-btn"><img src="../images/button delete.png"></button>
+                    <button class="delete-btn">X</button>
                 </div>
             </div>
             <div class="task-dropdown-menu" style="display: none;">
@@ -84,7 +84,8 @@
             overlay.style.display = 'block';
             confirmContainer.style.display = 'block';
 
-            confirmContainer.querySelector('.confirm-delete').addEventListener('click', () => {
+            confirmContainer.querySelector('.confirm-delete').addEventListener('click', (ev) => {
+                ev.stopPropagation();
                 taskList.removeChild(container);
                 removeTaskFromLocalStorage(taskTitle, taskText);
                 checkForNoTasks();
@@ -92,7 +93,8 @@
                 confirmContainer.style.display = 'none';
             });
 
-            confirmContainer.querySelector('.cancel-delete').addEventListener('click', () => {
+            confirmContainer.querySelector('.cancel-delete').addEventListener('click', (ev) => {
+                ev.stopPropagation();
                 overlay.style.display = 'none';
                 confirmContainer.style.display = 'none';
             });
