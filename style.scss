@@ -53,13 +53,16 @@ input[type="text"] {
 .add-button-container {
   display: flex;
   align-items: center;
+  justify-content: center;
+  font-size: 50px;
   margin-bottom: 10px;
-
-  img {
-      width: 70px;
-      height: 70px;
-      cursor: pointer;
-  }
+  color: rgba(163, 87, 9, 1);
+  border: 2px solid rgba(163, 87, 9, 1);
+  border-radius: 8px;
+  background-color: rgba(27, 26, 23, 1);
+  cursor: pointer;
+  width: 70px;
+  height: 70px;
 }
 
 #task-description {
@@ -148,6 +151,9 @@ li {
       margin-right: 5px;
       width: 32px;
       height: 32px;
+      color: rgba(217, 217, 217, 1);
+      border: 1px solid rgba(163, 87, 9, 1);
+      border-radius: 4px;
   }
 }
 
@@ -184,8 +190,9 @@ li {
 }
 
 .delete-btn {
-  background: transparent;
-  border: none;
+  background: rgba(27, 26, 23, 1);
+  color: rgba(163, 87, 9, 1);
+  border: 3px solid rgba(163, 87, 9, 1);
   border-radius: 4px;
   cursor: pointer;
   margin-right: 16px;
@@ -195,10 +202,6 @@ li {
   width: 35px;
   align-items: center;
 
-  img {
-      height: 35px;
-      width: 35px;
-  }
 }
 
 .overlay {
@@ -412,7 +415,7 @@ li {
   font-size: 24px;
   text-align: center;
   margin: 16px auto;
-  width: 40%;
+  width: 15%;
   max-width: none;
   overflow: visible;
   white-space: nowrap;

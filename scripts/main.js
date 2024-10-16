@@ -1,4 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
     const taskTitleInput = document.getElementById('task-title');
     const taskInput = document.getElementById('task-input');
     const taskList = document.getElementById('task-list');
@@ -219,4 +218,3 @@ document.addEventListener('DOMContentLoaded', () => {
         const tasks = getTasksFromLocalStorage();
         noTasksMessage.style.display = tasks.length === 0 ? 'flex' : 'none';
     }
-});

@@ -53,12 +53,16 @@ input[type=text] {
 .add-button-container {
   display: flex;
   align-items: center;
+  justify-content: center;
+  font-size: 50px;
   margin-bottom: 10px;
-}
-.add-button-container img {
+  color: rgb(163, 87, 9);
+  border: 2px solid rgb(163, 87, 9);
+  border-radius: 8px;
+  background-color: rgb(27, 26, 23);
+  cursor: pointer;
   width: 70px;
   height: 70px;
-  cursor: pointer;
 }
 
 #task-description {
@@ -145,6 +149,9 @@ li {
   margin-right: 5px;
   width: 32px;
   height: 32px;
+  color: rgb(217, 217, 217);
+  border: 1px solid rgb(163, 87, 9);
+  border-radius: 4px;
 }
 
 .task-dropdown-menu {
@@ -177,8 +184,9 @@ li {
 }
 
 .delete-btn {
-  background: transparent;
-  border: none;
+  background: rgb(27, 26, 23);
+  color: rgb(163, 87, 9);
+  border: 3px solid rgb(163, 87, 9);
   border-radius: 4px;
   cursor: pointer;
   margin-right: 16px;
@@ -187,10 +195,6 @@ li {
   height: 35px;
   width: 35px;
   align-items: center;
-}
-.delete-btn img {
-  height: 35px;
-  width: 35px;
 }
 
 .overlay {
@@ -310,6 +314,7 @@ li {
   padding: 16px 0;
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 16px;
   width: 80%;
   max-width: 500px;
@@ -388,7 +393,7 @@ li {
   font-size: 24px;
   text-align: center;
   margin: 16px auto;
-  width: 40%;
+  width: 15%;
   max-width: none;
   overflow: visible;
   white-space: nowrap;
